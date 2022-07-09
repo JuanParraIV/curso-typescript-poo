@@ -1,6 +1,6 @@
 export class Animal{
     constructor(
-        private _name:string
+        protected name:string
     ){}
 
     move(){
@@ -11,33 +11,30 @@ export class Animal{
         console.log(`Hello, I'm ${this.name}`)
     }
 
-    get name(){
-        return this._name
+    protected doSomething(){
+        console.log('dooo')
     }
 
-    set name(value:string){
-        this._name= value
-    }
 }
 
 export class Dog extends Animal {
     constructor(
-     name: string,
+    name: string,
     public owner:string
     ){
         super(name)
     }
 
-    roar(times:number = 1){
+    roar(times:number = 1):void{
         for (let index = 0; index < times; index++) {
             console.log(`${this.name} is roaring`)
         }
+        this.doSomething
     }
 }
 
 const kaiser = new Dog('Kaiser','nico')
 
-kaiser.greeting()
-kaiser.roar(4)
 
-console.log(kaiser.owner);
+kaiser.roar(1)
+kaiser.doSomething()
